@@ -3,8 +3,8 @@ class Movie < ActiveRecord::Base
 def self.all_ratings
 	#All on Ruby effort (AR methods always return ActiveRecord objects)
 
-	#return all.map {|movie| movie.rating}.uniq	
-	return all.group_by {|movie| movie.rating}.keys
+	return all.map {|movie| movie.rating}.uniq	
+	#return all.group_by {|movie| movie.rating}.keys
 
 
 	#All DB effort should be done by hand. Returns array of hashes 
@@ -17,7 +17,10 @@ def self.all_ratings
 
 	#Mix, injecting only the DISTINCT and selecting rating by mapping in Ruby
 
-	#return select("DISTINCT rating").map(&:rating)	
+	#return select("DISTINCT rating").map(&:rating)
+
+	#"Mix" for rails 4.0.0 (the VM has a lower version) there is a distinct method, I suppose it uses the DB query
+	#return select(:rating).distinct.map(&:rating)	
 
 end
 
