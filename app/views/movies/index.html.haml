@@ -5,8 +5,9 @@
   Include:
   - @all_ratings.each do |rating|
     = rating
-    = check_box_tag "ratings[#{rating}]", value = "1", checked = ("true" if @checkboxes.has_key?(rating))
+    = check_box_tag "ratings[#{rating}]", value = "1", checked = ("true" if params[:ratings].has_key?(rating))
   = submit_tag "Refresh", :id => "ratings_submit"
+
 
 %table#movies
   %thead	
@@ -19,7 +20,7 @@
   %tbody
     - @movies.each do |movie|
       %tr
-        %td= movie.title
+        %td= movie.title 
         %td= movie.rating
         %td= movie.release_date
         %td= link_to "More about #{movie.title}", movie_path(movie)
